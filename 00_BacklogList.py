@@ -68,18 +68,22 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     # the first Column is configured to use agGroupCellRenderer
     "columnDefs": [
         {'field': 'Sprint', 'editable':True,'sort':'asc'},
-        {'field': 'Title',  'editable':True,},
+        {'field': 'Project', 'width':250, 'editable':True,},
         {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
-        {'field': 'ReceivedDate', 'width':175, 'editable':False,},
+        {'field': 'ReceivedDate', 'editable':False,},
         {'field': 'Analyst','editable':True,},
         {'field': 'Points', 'editable':True,},
     ],
     "defaultColDef": {
         "minColumnWidth": 75,
-        'filterable': False,
-        'sortable': False,
+        'filterable': True,
+        'sortable': True,
         'editable': True,
-        'suppressMenu': True,
+        'rowDrag': True,
+        'rowDragManaged': True,
+        'rowDragEntireRow': True,
+        'rowDragMultiRow': True,
+        'suppressMenu': False,
     },
     
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
