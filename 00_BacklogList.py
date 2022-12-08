@@ -13,7 +13,7 @@ FACBEG  =  306
 FACEND  = 321
 
 st.set_page_config(
-     page_title="Mamm 2023 Budget",
+     page_title="Sprint Board",
      layout="wide"
      )
 padding = 0
