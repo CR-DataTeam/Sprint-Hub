@@ -8,10 +8,6 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import strConstants as sc
 
-FACNAME = 'Summary'
-FACBEG  =  306
-FACEND  = 321
-
 st.set_page_config(
      page_title="Sprint Board",
      layout="wide"
@@ -43,7 +39,7 @@ creds = service_account.Credentials.from_service_account_file(
     
 service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 spreadsheetId = '1wNYw_VE9oCJENqtUUEnrRgK0qJWL9dMSgHkLXIAtSTw'
-rangeName = 'PrimaryTable!A:H'
+rangeName = 'PrimaryTable!A:G'
 
 def fetchData():
     creds = service_account.Credentials.from_service_account_file(
@@ -77,17 +73,6 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         {'field': 'ReceivedDate', 'width':175, 'editable':False,},
         {'field': 'Analyst','editable':True,},
         {'field': 'Points', 'editable':True,},
-        """
-        {   'headerName': 'Extra',
-             'field': 'groupExtra',
-             'openByDefault':False,
-             'children': [
-                 {'field': 'Jan19', 'columnGroupShow':'open', 'editable':False, 'resizable':False, 'suppressSizeToFit':True, 'suppressAutoSize':True, 'filter':False, 'width':75, 'cellStyle':{'background-color':'lightblue'}},
-                 {'field': 'Feb19', 'columnGroupShow':'open', 'editable':False, 'resizable':False, 'suppressSizeToFit':True, 'suppressAutoSize':True, 'filter':False, 'width':75, 'cellStyle':{'background-color':'lightblue'}},
-                      'cellRenderer':'agAnimateShowChangeCellRenderer',},
-                 ],
-        },      
-        """
     ],
     "defaultColDef": {
         "minColumnWidth": 75,
@@ -129,43 +114,7 @@ if dfall.equals(dfgo) == False:
                                         valueInputOption='USER_ENTERED', 
                                         body=body).execute()
 
-def f(dat, c='lightblue'):
-    return [f'background-color: {c}' for i in dat]
 
-"""
-#import xlsxwriter
-from io import BytesIO
-
-@st.cache
-def convert_df():
-    output = BytesIO()
-    writer = pd.ExcelWriter(output, 
-                            engine='xlsxwriter', 
-                            engine_kwargs={'options':{'strings_to_numbers':True, 'in_memory': True}})
-    for i in range(len(XLfacilityList)):
-        dfall[dfall['FacilityName']==XLfacilityList[i]].style.apply(f, axis=0, subset=lockedMonths).to_excel(writer,
-                                                                 sheet_name=XLfacilityList[i],
-                                                                 index=False)
-    writer.save()
-    return output.getvalue() 
-
-
-#### Populating the various bottom sections
-col1, col2, col3, col4 = st.columns([1,1,1,1])
-with col1:
-    st.download_button(
-        label="Download Excel workbook",
-        data=convert_df(),
-        file_name="Mamm2023Budget_export.xlsx",
-        mime="application/vnd.ms-excel"
-    )
-#with col2:
-#    st.markdown('Jan19-Aug22: Actuals')
-#    st.markdown('Sep22-Dec22: Forecast')
-#    st.markdown('Jan23-Dec23: Budget')
-
-"""
-    
     
     
     
