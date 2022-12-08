@@ -106,8 +106,6 @@ if dfall.equals(dfgo) == False:
         dfall = dfgo
         goog = dfgo.values.tolist()
         body = { 'values': goog }
-        outputStart = FACBEG
-        outputEnd   = FACEND
         service.spreadsheets().values().update(
                                         spreadsheetId=spreadsheetId, 
                                         range=rangeName,
