@@ -108,7 +108,7 @@ if dfall.equals(dfgo) == False:
         body = { 'values': goog }
         service.spreadsheets().values().update(
                                         spreadsheetId=spreadsheetId, 
-                                        range=rangeName,
+                                        range='PrimaryTable!A2:G',
                                         valueInputOption='USER_ENTERED', 
                                         body=body).execute()
 
