@@ -71,12 +71,12 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     "pagination": False,
     # the first Column is configured to use agGroupCellRenderer
     "columnDefs": [
-        {'field': 'Sprint', 'hide': False,'editable':True,'sort':'asc'},
-        {'field': 'Title', 'hide': False,'editable':True,},
+        {'field': 'Sprint', 'editable':True,'sort':'asc'},
+        {'field': 'Title',  'editable':True,},
         {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
         {'field': 'ReceivedDate', 'width':175, 'editable':False,},
-        {'field': 'Analyst', 'hide': True,'editable':True,},
-        {'field': 'Points', 'hide': True,'editable':True,},
+        {'field': 'Analyst','editable':True,},
+        {'field': 'Points', 'editable':True,},
         """
         {   'headerName': 'Extra',
              'field': 'groupExtra',
@@ -128,10 +128,6 @@ if dfall.equals(dfgo) == False:
                                         range=rangeName,
                                         valueInputOption='USER_ENTERED', 
                                         body=body).execute()
-
-del dfall['unid']
-del dfall['SortInt']
-del dfall['HistoricalVolumeFlag']
 
 def f(dat, c='lightblue'):
     return [f'background-color: {c}' for i in dat]
