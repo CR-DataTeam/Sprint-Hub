@@ -87,7 +87,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
         {'field': 'ReceivedDate', 'editable':True,},
         {'field': 'Analyst','editable':True,},
-        {'field': 'Effort', 'editable':True, 'rowdrag':False},
+        {'field': 'Effort', 'editable':True,},
     ],
     
     'rowDragManaged': True,
@@ -108,7 +108,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.MANUAL|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
+        update_mode=GridUpdateMode.MANUAL,#|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
         # update_on=['cellValueChanged','rowDragEnd','gridReady','firstDataRendered','modelUpdated'],
         fit_columns_on_grid_load=True,
         theme='light', 
