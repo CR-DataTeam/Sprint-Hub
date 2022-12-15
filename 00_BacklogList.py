@@ -12,9 +12,18 @@ st.set_page_config(
      page_title="Sprint Board",
      layout="wide"
      )
+padding = 0
+st.markdown(f""" <style>
+    .reportview-container .main .block-container{{
+        padding-top: {padding}rem;
+        padding-right: {padding}rem;
+        padding-left: {padding}rem;
+        padding-bottom: {padding}rem;
+    }} </style> """, unsafe_allow_html=True)
 
 st.markdown(sc.getCodeSnippet('sidebarWidth'), unsafe_allow_html=True)
 st.markdown(sc.getCodeSnippet('hideStreamlitStyle'), unsafe_allow_html=True)
+st.markdown(sc.getCodeSnippet('adjustPaddingAndFont'), unsafe_allow_html=True)
 js = JsCode(sc.getCodeSnippet('jsCodeStr'))
 
 ###############################################################################
@@ -51,7 +60,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     
     testbuild = {
     # enable Master / Detail
-    "enableRangeSelection": True,
+    # "enableRangeSelection": True,
     "pagination": False,
     "defaultColDef": {
         "minColumnWidth": 75,
@@ -67,7 +76,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     # the first Column is configured to use agGroupCellRenderer
     "columnDefs": [
         {'field': 'Sprint', 'editable':True,'rowDrag': True,'rowDragEntireRow': True,},#'sort':'asc',
-        {'field': 'Project', 'width':400, 'editable':True,},
+        {'field': 'Project', 'width':600, 'editable':True,},
         {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
         {'field': 'ReceivedDate', 'editable':True,},
         {'field': 'Analyst','editable':True,},
@@ -78,6 +87,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     'rowDragEntireRow': True,
     'rowDragMultiRow': True,
     'rowDrag':True,
+    'selection_mode':'multiple',
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
     }
     
@@ -86,7 +96,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
         height=600, 
