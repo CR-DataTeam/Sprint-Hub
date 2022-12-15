@@ -143,13 +143,17 @@ ucdfzh = ucdfz['Effort'].astype(int).sum()
 ucdfih = ucdfi['Effort'].astype(int).sum()
 ucdfmh = ucdfm['Effort'].astype(int).sum()
 
+if ucdfjh < 8:      joshStatus = "Healthy Capacity" 
+elif ucdfjh == 8:   joshStatus = "At Capacity" 
+else:               joshStatus = "Over-Capacity"
 
 with st.sidebar:
-    st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
-    st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
-    st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
-    st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
-    st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
+    st.markdown(body='Josh<br>'+joshStatus,unsafe_allow_html=True)
+    # st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
+    # st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
+    # st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
+    # st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
+    # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
     
 with st.form("newtask"):
