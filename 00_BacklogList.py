@@ -75,7 +75,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         'filterable': True,
         'sortable': True,
         'editable': True,
-        'rowDrag': False,
+        'rowDrag': True,
         'rowDragManaged': True,
         'rowDragEntireRow': False,
         'rowDragMultiRow': True,
@@ -111,9 +111,9 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
-        height=525, 
+        height=750, 
         allow_unsafe_jscode=True,
-        enable_enterprise_modules=True,
+        # enable_enterprise_modules=True,
         key='sprintBoardTableKey',
         )      
 
