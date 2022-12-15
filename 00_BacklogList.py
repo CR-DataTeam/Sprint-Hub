@@ -60,11 +60,22 @@ def fetchData():
     return dfall
 
 dfall = fetchData() 
+
+
+############################################################
 sprintDropDown=('not prioritized',
                 'Sprint TBD',
                 'Sprint 00 (ends 12/30)',
                 'Sprint 01 (ends 01/13)',
                 'Sprint 02 (ends 01/27)')
+
+teamList=('Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore')
+
+taskStatus=('Open','Closed','Blocked','On Hold')
+
+
+############################################################
+
 gb = GridOptionsBuilder.from_dataframe(dfall)
 gb.configure_default_column(rowDrag = True, 
                             rowDragManaged = True, 
