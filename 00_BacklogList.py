@@ -88,7 +88,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
         {'field': 'ReceivedDate', 'editable':True,},
         {'field': 'Analyst','editable':True,},
-        {'field': 'Effort', 'editable':True,'rowDrag': False,},
+        {'field': 'Effort', 'editable':True},
     ],
     
     'rowDragManaged': True,
