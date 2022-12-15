@@ -121,7 +121,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
 grid_response = displayTable(dfall)
 dfgo = grid_response['data']
 
-saveB = st.Button('Save Order')
+saveB = st.button('Save Order')
 
 if dfall.equals(dfgo) == False or saveB:
         dfall = dfgo
