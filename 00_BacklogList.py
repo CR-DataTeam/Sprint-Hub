@@ -2,7 +2,7 @@
 import pandas as pd
 import streamlit as st
 import calendar
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode, JsCode
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode, JsCode, ColumnsAutoSizeMode
 import datetime
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -59,13 +59,11 @@ dfall = fetchData()
 def displayTable(df: pd.DataFrame) -> AgGrid:
     
     testbuild = {
-    # enable Master / Detail
-    # "enableRangeSelection": True,
     "pagination": False,
     "defaultColDef": {
         "minColumnWidth": 75,
         'filterable': True,
-        'sortable': True,
+        'sortable': False,
         'editable': True,
         'rowDrag': True,
         'rowDragManaged': True,
@@ -73,20 +71,20 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         'rowDragMultiRow': True,
         'suppressMenu': False,
     },
-    # the first Column is configured to use agGroupCellRenderer
     "columnDefs": [
-        {'field': 'Sprint', 'editable':True,'rowDrag': True,'rowDragEntireRow': True,},#'sort':'asc',
-        {'field': 'Project', 'width':600, 'editable':True,},
-        {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
-        {'field': 'ReceivedDate', 'editable':True,},
-        {'field': 'Analyst','editable':True,},
-        {'field': 'Effort', 'editable':True,},
+        {'field': 'Sprint', 'rowDrag': True,'rowDragEntireRow': True,},
+        {'field': 'Project', 'width':450},
+        {'field': 'Status', 'width':125},
+        {'field': 'ReceivedDate'},
+        {'field': 'Analyst'},
+        {'field': 'Effort'},
     ],
     'rowDragManaged': True,
     'rowDragEntireRow': True,
     'rowDragMultiRow': True,
     'rowDrag':True,
     'selection_mode':'multiple',
+    'use_checkbox':True,
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
     }
     
@@ -96,7 +94,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.MODEL_CHANGED,
-        fit_columns_on_grid_load=True,
+        columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW,
         enable_enterprise_modules=True,
         theme='light', 
         height=600, 
