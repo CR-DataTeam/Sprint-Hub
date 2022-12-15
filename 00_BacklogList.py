@@ -83,12 +83,12 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     },
     # the first Column is configured to use agGroupCellRenderer
     "columnDefs": [
-        {'field': 'Sprint', 'editable':True,'sort':'asc','rowDrag': True,'rowDragEntireRow': True,},#
-        {'field': 'Project', 'width':250, 'editable':True,},
+        {'field': 'Sprint', 'editable':True,'rowDrag': True,'rowDragEntireRow': True,},#'sort':'asc',
+        {'field': 'Project', 'width':400, 'editable':True,},
         {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
         {'field': 'ReceivedDate', 'editable':True,},
         {'field': 'Analyst','editable':True,},
-        {'field': 'Effort', 'editable':True},
+        {'field': 'Effort', 'editable':True, 'rowdrag':False},
     ],
     
     'rowDragManaged': True,
