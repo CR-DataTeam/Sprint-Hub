@@ -39,7 +39,7 @@ creds = service_account.Credentials.from_service_account_file(
     
 service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 spreadsheetId = '1wNYw_VE9oCJENqtUUEnrRgK0qJWL9dMSgHkLXIAtSTw'
-rangeName = 'PrimaryTable!A:G'
+rangeName = 'PrimaryTable!A:F'
 
 def fetchData():
     creds = service_account.Credentials.from_service_account_file(
@@ -70,15 +70,6 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     # enable Master / Detail
     "enableRangeSelection": True,
     "pagination": False,
-    # the first Column is configured to use agGroupCellRenderer
-    "columnDefs": [
-        {'field': 'Sprint', 'editable':True,'sort':'asc','rowDrag': True,'rowDragEntireRow': True,},
-        {'field': 'Project', 'width':250, 'editable':True,},
-        {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
-        {'field': 'ReceivedDate', 'editable':False,},
-        {'field': 'Analyst','editable':True,},
-        {'field': 'Points', 'editable':True,},
-    ],
     "defaultColDef": {
         "minColumnWidth": 75,
         'filterable': True,
@@ -90,6 +81,16 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         'rowDragMultiRow': True,
         'suppressMenu': False,
     },
+    # the first Column is configured to use agGroupCellRenderer
+    "columnDefs": [
+        {'field': 'Sprint', 'editable':True,'sort':'asc','rowDrag': True,'rowDragEntireRow': True,},
+        {'field': 'Project', 'width':250, 'editable':True,},
+        {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
+        {'field': 'ReceivedDate', 'editable':False,},
+        {'field': 'Analyst','editable':True,},
+        {'field': 'Points', 'editable':True,},
+    ],
+    
     'rowDragManaged': True, 
     # onRowDragEnd = onRowDragEnd, 
     # deltaRowDataMode = True, 
@@ -123,7 +124,7 @@ if dfall.equals(dfgo) == False:
         body = { 'values': goog }
         service.spreadsheets().values().update(
                                         spreadsheetId=spreadsheetId, 
-                                        range='PrimaryTable!A2:G',
+                                        range='PrimaryTable!A2:F',
                                         valueInputOption='USER_ENTERED', 
                                         body=body).execute()
 
