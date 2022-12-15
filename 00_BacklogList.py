@@ -83,11 +83,14 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         {'field': 'Effort', 'editable':True,},
     ],
     
+    
     'rowDragManaged': True,
     'rowDragEntireRow': True,
     'rowDragMultiRow': True,
     'rowDrag':True,
     'selection_mode':'multiple',
+    'use_checkbox':False,
+    'header_checkbox':False,
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
     }
     
