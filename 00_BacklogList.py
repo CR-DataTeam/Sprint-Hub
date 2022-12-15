@@ -80,7 +80,7 @@ gridOptions = gb.build()
 
 grid_response = AgGrid(
         data=dfall,
-        gridOptions=gb,
+        gridOptions=gridOptions,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.MODEL_CHANGED,
         fit_columns_on_grid_load=True,
