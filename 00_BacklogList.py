@@ -86,7 +86,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.GRID_CHANGED,#SELECTION_CHANGED|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SORTING_CHANGED,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
         height=600, 
@@ -108,7 +108,7 @@ if dfall.equals(dfgo) == False:
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 
-st.sidebar.button('ye')
+# st.sidebar.button('ye')
 
     
     
