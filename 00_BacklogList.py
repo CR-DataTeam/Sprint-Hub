@@ -209,7 +209,7 @@ with st.form("newtask"):
    submitted = st.form_submit_button("Submit")
    definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
    if submitted:
-       st.write("Thanks!")
+       st.write("Thanks! Please refresh to see your item added at the bottom.")
        formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0,formNotes]).T
        formdf.columns = definecols
        goog = formdf.values.tolist()
