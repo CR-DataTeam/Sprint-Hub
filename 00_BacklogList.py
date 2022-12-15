@@ -2,7 +2,7 @@
 import pandas as pd
 import streamlit as st
 import calendar
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode, JsCode, ColumnsAutoSizeMode
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode, JsCode
 import datetime
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -55,46 +55,35 @@ def fetchData():
 
 dfall = fetchData() 
 
-#for i in range(len(facilityList)):
-def displayTable(df: pd.DataFrame) -> AgGrid:
-    
-    testbuild = {
-    "pagination": False,
-    "defaultColDef": {
-        "minColumnWidth": 75,
-        'filterable': True,
-        'sortable': False,
-        'editable': True,
-        'rowDrag': True,
-        'rowDragManaged': True,
-        'rowDragEntireRow': False,
-        'rowDragMultiRow': True,
-        'suppressMenu': False,
-    },
-    "columnDefs": [
-        {'field': 'Sprint', 'rowDrag': True,'rowDragEntireRow': True,},
-        {'field': 'Project', 'width':450},
-        {'field': 'Status', 'width':125},
-        {'field': 'ReceivedDate'},
-        {'field': 'Analyst'},
-        {'field': 'Effort'},
-    ],
-    'rowDragManaged': True,
-    'rowDragEntireRow': True,
-    'rowDragMultiRow': True,
-    'rowDrag':True,
-    'selection_mode':'multiple',
-    'use_checkbox':True,
-    "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
-    }
-    
-    return AgGrid(
+gb = GridOptionsBuilder.from_dataframe(dfall)
+gb.configure_default_column(rowDrag = True, 
+                            rowDragManaged = True, 
+                            rowDragEntireRow = False, 
+                            rowDragMultiRow=True,
+                            minColumnWidth=75,
+                            filterable=True,
+                            sortable=False,
+                            editable=True,
+                            suppressMenu=False,)
+gb.configure_column('Sprint', rowDrag = True, rowDragEntireRow = True)
+gb.configure_column('Project',width=400) 
+gb.configure_column('Status',width=125) 
+gb.configure_side_bar()
+gb.configure_selection(selection_mode="multiple", use_checkbox=True)
+gb.configure_grid_options(rowDragManaged=True,
+    rowDragEntireRow=True,
+    rowDragMultiRow=True,
+    rowDrag=True,
+    onCellValueChanged="--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
+    )
+gridOptions = gb.build()
+
+grid_response = AgGrid(
         data=dfall,
-        editable=True,
-        gridOptions=testbuild,
+        gridOptions=gb,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.MODEL_CHANGED,
-        columns_auto_size_mode=ColumnsAutoSizeMode.FIT_ALL_COLUMNS_TO_VIEW,
+        fit_columns_on_grid_load=True,
         enable_enterprise_modules=True,
         theme='light', 
         height=600, 
@@ -102,7 +91,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         key='sprintBoardTableKey',
         )      
 
-grid_response = displayTable(dfall)
+
 dfgo = grid_response['data']
 
 
