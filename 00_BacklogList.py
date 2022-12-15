@@ -75,7 +75,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         'filterable': True,
         'sortable': True,
         'editable': True,
-        'rowDrag': False,
+        # 'rowDrag': False,
         'rowDragManaged': True,
         'rowDragEntireRow': False,
         'rowDragMultiRow': True,
