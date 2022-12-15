@@ -110,7 +110,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
         #update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
-        update_on=['cellValueChanged','rowDragEnd'],
+        update_on=['cellValueChanged','rowDragEnd','gridReady','firstDataRendered','modelUpdated'],
         fit_columns_on_grid_load=True,
         theme='light', 
         height=750, 
