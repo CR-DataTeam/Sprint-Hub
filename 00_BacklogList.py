@@ -22,10 +22,10 @@ st.markdown(f""" <style>
     }} </style> """, unsafe_allow_html=True)
     
 custom_css = {
-    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "10px !important",
-    "font-family": "Roboto, sans-serif !important;"},
+    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "9px !important",}}
+    # "font-family": "Roboto, sans-serif !important;"},
     #".ag-header-cell-text": {"color": "#495057 !important;"},
-    }    
+    # }    
 
 st.markdown(sc.getCodeSnippet('sidebarWidth'), unsafe_allow_html=True)
 st.markdown(sc.getCodeSnippet('hideStreamlitStyle'), unsafe_allow_html=True)
@@ -70,7 +70,7 @@ gb.configure_default_column(rowDrag = True,
                             rowDragManaged = True, 
                             rowDragEntireRow = False, 
                             rowDragMultiRow=True,
-                            minColumnWidth=25,
+                            #minColumnWidth=25,
                             filterable=True,
                             sortable=False,
                             editable=True,
@@ -96,7 +96,7 @@ grid_response = AgGrid(
         gridOptions=gridOptions,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.MODEL_CHANGED,
-        fit_columns_on_grid_load=True,
+        #fit_columns_on_grid_load=True,
         enable_enterprise_modules=True,
         theme='light', 
         height=600, 
