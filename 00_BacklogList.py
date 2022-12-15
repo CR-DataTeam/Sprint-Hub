@@ -55,6 +55,7 @@ def fetchData():
 
 dfall = fetchData() 
 sprintDropDown=('not prioritized',
+                'Sprint TBD',
                 'Sprint 00 (ends 12/30)',
                 'Sprint 01 (ends 01/13)',
                 'Sprint 02 (ends 01/27)')
@@ -70,9 +71,10 @@ gb.configure_default_column(rowDrag = True,
                             suppressMenu=False,)
 gb.configure_column('Sprint',cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown}, width=125,rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400) 
-gb.configure_column('ReceivedDate',width=75) 
-gb.configure_column('Analyst',width=75)
-gb.configure_column('Effort',width=30)
+gb.configure_column('Status',width=100) 
+gb.configure_column('ReceivedDate',width=125) 
+gb.configure_column('Analyst',width=175)
+gb.configure_column('Effort',width=100,rowDrag=False)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gb.configure_grid_options(rowDragManaged=True,
