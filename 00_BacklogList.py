@@ -12,15 +12,6 @@ st.set_page_config(
      page_title="Sprint Board",
      layout="wide"
      )
-padding = 0
-st.markdown(f""" <style>
-    .reportview-container .main .block-container{{
-        padding-top: {padding}rem;
-        padding-right: {padding}rem;
-        padding-left: {padding}rem;
-        padding-bottom: {padding}rem;
-    }} </style> """, unsafe_allow_html=True)
-
 
 st.markdown(sc.getCodeSnippet('sidebarWidth'), unsafe_allow_html=True)
 st.markdown(sc.getCodeSnippet('hideStreamlitStyle'), unsafe_allow_html=True)
@@ -58,12 +49,6 @@ dfall = fetchData()
 
 #for i in range(len(facilityList)):
 def displayTable(df: pd.DataFrame) -> AgGrid:
-    i = 0
-    
-    # gb.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = False, rowDragMultiRow=True)
-    # gb.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd, 
-        #deltaRowDataMode = True, getRowNodeId = getRowNodeId, onGridReady = onGridReady, animateRows = True, onRowDragMove = onRowDragMove)
-    # gridOptions = gb.build()
     
     testbuild = {
     # enable Master / Detail
@@ -94,12 +79,6 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     'rowDragEntireRow': True,
     'rowDragMultiRow': True,
     'rowDrag':True,
-    # 'onRowDragEnd': onRowDragEnd, 
-    # 'deltaRowDataMode': True, 
-    # 'getRowNodeId': getRowNodeId, 
-    # 'onGridReady': onGridReady, 
-    # 'animateRows': True, 
-    # 'onRowDragMove': onRowDragMove,
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
     }
     
@@ -109,12 +88,10 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.GRID_CHANGED,#SELECTION_CHANGED|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SORTING_CHANGED,
-        # update_on=['cellValueChanged','rowDragEnd','gridReady','firstDataRendered','modelUpdated'],
         fit_columns_on_grid_load=True,
         theme='light', 
         height=600, 
         allow_unsafe_jscode=True,
-        # enable_enterprise_modules=True,
         key='sprintBoardTableKey',
         )      
 
@@ -131,7 +108,6 @@ if dfall.equals(dfgo) == False:
                                     range='PrimaryTable!A2:F',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
-    st.experimental_rerun()
 
 idk = st.button('ye')
 if idk: st.experimental_rerun()
