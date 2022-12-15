@@ -131,7 +131,7 @@ if dfall.equals(dfgo) == False:
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 selectedTest = grid_response['selected_rows']
-print(selectedTest['Notes'])    
+print(selectedTest)    
 
 ucdfa = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
