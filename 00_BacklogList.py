@@ -121,17 +121,28 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
 grid_response = displayTable(dfall)
 dfgo = grid_response['data']
 
-saveB = st.checkbox('Save Order')
+def checkboxRun():
+    dfall = grid_response['data']
+    goog = dfgo.values.tolist()
+    body = { 'values': goog }
+    service.spreadsheets().values().update(
+                                    spreadsheetId=spreadsheetId, 
+                                    range='PrimaryTable!A2:F',
+                                    valueInputOption='USER_ENTERED', 
+                                    body=body).execute()
+saveB = st.checkbox('Save Order',on_change=checkboxRun())
 
-if dfall.equals(dfgo) == False or saveB:
-        dfall = grid_response['data']
-        goog = dfgo.values.tolist()
-        body = { 'values': goog }
-        service.spreadsheets().values().update(
-                                        spreadsheetId=spreadsheetId, 
-                                        range='PrimaryTable!A2:F',
-                                        valueInputOption='USER_ENTERED', 
-                                        body=body).execute()
+
+
+if dfall.equals(dfgo) == False:
+    dfall = grid_response['data']
+    goog = dfgo.values.tolist()
+    body = { 'values': goog }
+    service.spreadsheets().values().update(
+                                    spreadsheetId=spreadsheetId, 
+                                    range='PrimaryTable!A2:F',
+                                    valueInputOption='USER_ENTERED', 
+                                    body=body).execute()
 
 
     
