@@ -68,7 +68,7 @@ gb.configure_default_column(rowDrag = True,
                             sortable=False,
                             editable=True,
                             suppressMenu=False,)
-gb.configure_column('Sprint',cellEditor='agSelectCellEditor',cellEditorParams={'values': sprintDropDown }, width=125,rowDrag = True, rowDragEntireRow = True)
+gb.configure_column('Sprint',cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown}, width=125,rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400) 
 gb.configure_column('ReceivedDate',width=75) 
 gb.configure_column('Analyst',width=75)
