@@ -20,6 +20,12 @@ st.markdown(f""" <style>
         padding-left: {padding}rem;
         padding-bottom: {padding}rem;
     }} </style> """, unsafe_allow_html=True)
+    
+custom_css = {
+    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "10px !important",
+    "font-family": "Roboto, sans-serif !important;"},
+    #".ag-header-cell-text": {"color": "#495057 !important;"},
+    }    
 
 st.markdown(sc.getCodeSnippet('sidebarWidth'), unsafe_allow_html=True)
 st.markdown(sc.getCodeSnippet('hideStreamlitStyle'), unsafe_allow_html=True)
@@ -69,12 +75,12 @@ gb.configure_default_column(rowDrag = True,
                             sortable=False,
                             editable=True,
                             suppressMenu=False,)
-gb.configure_column('Sprint',cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown}, width=190,rowDrag = True, rowDragEntireRow = True)
-gb.configure_column('Project',width=400) 
+gb.configure_column('Sprint',width=250,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
+gb.configure_column('Project',width=450) 
 gb.configure_column('Status',width=80,rowDrag=False) 
 gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
 gb.configure_column('Analyst',width=125,rowDrag=False)
-gb.configure_column('Effort',width=65,rowDrag=False)
+gb.configure_column('Effort',width=50,rowDrag=False)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gb.configure_grid_options(rowDragManaged=True,
@@ -96,6 +102,7 @@ grid_response = AgGrid(
         height=600, 
         allow_unsafe_jscode=True,
         key='sprintBoardTableKey',
+        custom_css=custom_css
         )      
 
 
