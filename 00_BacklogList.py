@@ -109,7 +109,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
         height=750, 
@@ -121,7 +121,9 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
 grid_response = displayTable(dfall)
 dfgo = grid_response['data']
 
-if dfall.equals(dfgo) == False:
+saveB = st.Button('Save Order')
+
+if dfall.equals(dfgo) == False or saveB:
         dfall = dfgo
         goog = dfgo.values.tolist()
         body = { 'values': goog }
