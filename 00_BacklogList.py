@@ -109,7 +109,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SORTING_CHANGED,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
         height=750, 
