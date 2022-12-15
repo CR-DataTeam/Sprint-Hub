@@ -123,7 +123,7 @@ dfall = fetchData()
 def displayTable(df: pd.DataFrame) -> AgGrid:
     gb = GridOptionsBuilder.from_dataframe(dfall)
     gb.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = False, rowDragMultiRow=True)
-    gb.configure_column('bloco', rowDrag = True, rowDragEntireRow = True)
+    gb.configure_column('Sprint', rowDrag = True, rowDragEntireRow = True)
     gb.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd, deltaRowDataMode = True, getRowNodeId = getRowNodeId, onGridReady = onGridReady, animateRows = True, onRowDragMove = onRowDragMove)
     gridOptions = gb.build()
     return AgGrid(
@@ -131,10 +131,10 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=gridOptions,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
+        update_mode=GridUpdateMode.MANUAL,            #GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
-        height=525, 
+        height=750, 
         allow_unsafe_jscode=True,
         enable_enterprise_modules=True,
         key='sprintBoardTableKey',
