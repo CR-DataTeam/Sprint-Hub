@@ -82,15 +82,11 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         {'field': 'Analyst','editable':True,},
         {'field': 'Effort', 'editable':True,},
     ],
-    
-    
     'rowDragManaged': True,
     'rowDragEntireRow': True,
     'rowDragMultiRow': True,
     'rowDrag':True,
     'selection_mode':'multiple',
-    'use_checkbox':False,
-    'header_checkbox':False,
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
     }
     
@@ -99,8 +95,9 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
+        update_mode=GridUpdateMode.MODEL_CHANGED,
         fit_columns_on_grid_load=True,
+        enable_enterprise_modules=True,
         theme='light', 
         height=600, 
         allow_unsafe_jscode=True,
