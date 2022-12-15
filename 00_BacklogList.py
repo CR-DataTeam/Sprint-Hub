@@ -120,8 +120,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
 
 grid_response = displayTable(dfall)
 dfgo = grid_response['data']
-idk = st.button('ye')
-if idk: st.experimental_rerun()
+
 
 if dfall.equals(dfgo) == False:
     dfall = grid_response['data']
@@ -132,8 +131,10 @@ if dfall.equals(dfgo) == False:
                                     range='PrimaryTable!A2:F',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
+    st.experimental_rerun()
 
-
+idk = st.button('ye')
+if idk: st.experimental_rerun()
     
     
     
