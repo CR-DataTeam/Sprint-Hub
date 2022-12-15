@@ -162,7 +162,8 @@ with st.form("newtask"):
    definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort']
    if submitted:
        st.write("Thanks!")
-       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0],columns=definecols)
+       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0])
+       formdf.columns = definecols
        goog = formdf.values.tolist()
        body = { 'values': goog }
        service.spreadsheets().values().append(
