@@ -108,7 +108,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.SELECTION_CHANGED|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SORTING_CHANGED,
+        update_mode=GridUpdateMode.GRID_CHANGED,#SELECTION_CHANGED|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED|GridUpdateMode.SORTING_CHANGED,
         # update_on=['cellValueChanged','rowDragEnd','gridReady','firstDataRendered','modelUpdated'],
         fit_columns_on_grid_load=True,
         theme='light', 
