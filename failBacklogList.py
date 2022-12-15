@@ -151,6 +151,25 @@ if saveButton:
                                     range='PrimaryTable!A2:F',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
+    
+    
+with st.form("newtask"):
+   st.write("Add New Project")
+   formName = st.slider("Project")
+   formAnalyst = st.checkbox("Form checkbox")
+
+   # Every form must have a submit button.
+   submitted = st.form_submit_button("Submit")
+   if submitted:
+       st.write("Thanks!")
+       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0])
+       goog = formdf.values.tolist()
+       body = { 'values': goog }
+       service.spreadsheets().values().append(
+                                               spreadsheetId=spreadsheetId, 
+                                               range='PrimaryTable!A2:F',
+                                               valueInputOption='USER_ENTERED', 
+                                               body=body).execute()
 
 
     
