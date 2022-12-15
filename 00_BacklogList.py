@@ -75,7 +75,7 @@ gb.configure_default_column(rowDrag = True,
                             sortable=False,
                             editable=True,
                             suppressMenu=False,)
-gb.configure_column('Sprint',width=250,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
+gb.configure_column('Sprint',width=325,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=450) 
 gb.configure_column('Status',width=80,rowDrag=False) 
 gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
