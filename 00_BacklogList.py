@@ -154,7 +154,7 @@ else:
     joshSC = 'red'
 
 with st.sidebar:
-    st.markdown(body='**Josh**<br><span style="color:'+joshSC+'">'+joshStatus+'</span><br><sup>('+ucdfjh+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Josh**<br><span style="color:'+joshSC+'">'+joshStatus+'</span><br><sup>('+str(ucdfjh)+')</sup>',unsafe_allow_html=True)
     # st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
     # st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
     # st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
