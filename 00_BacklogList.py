@@ -118,10 +118,16 @@ if dfall.equals(dfgo) == False:
                                     range='PrimaryTable!A2:F',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
+    
+joshLabel = """Josh
+Next Sprint"""
 sidebar_track_df = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 sbEff = sidebar_track_df['Effort'].astype(int).sum()
+
+
+
 with st.sidebar:
-    st.metric('Upcoming Sprint',value=sbEff,delta=32-int(sbEff),)#delta_color=)
+    st.metric(joshLabel,value=sbEff,delta=32-int(sbEff),)#delta_color=)
 
     
     
