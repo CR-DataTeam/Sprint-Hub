@@ -119,9 +119,9 @@ if dfall.equals(dfgo) == False:
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 sidebar_track_df = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
-sbEff = sidebar_track_df['Effort']
+sbEff = sidebar_track_df['Effort'].sum()
 with st.sidebar:
-    sbEff
+    st.metric('Upcoming Sprint',value=sbEff,delta=32-sbEff,)#delta_color=)
 
     
     
