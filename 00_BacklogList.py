@@ -22,7 +22,7 @@ st.markdown(f""" <style>
     }} </style> """, unsafe_allow_html=True)
     
 custom_css = {
-    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "9px !important",}}
+    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "10px !important",}}
     # "font-family": "Roboto, sans-serif !important;"},
     #".ag-header-cell-text": {"color": "#495057 !important;"},
     # }    
