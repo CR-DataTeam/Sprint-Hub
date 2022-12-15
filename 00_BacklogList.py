@@ -170,7 +170,8 @@ with st.form("newtask"):
                                                spreadsheetId=spreadsheetId, 
                                                range='PrimaryTable!A2:F',
                                                valueInputOption='USER_ENTERED', 
-                                               body=body).execute()    
+                                               body=body).execute() 
+       st.experimental_rerun()
     
     
     
