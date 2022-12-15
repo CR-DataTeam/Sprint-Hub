@@ -43,7 +43,7 @@ creds = service_account.Credentials.from_service_account_file(
     
 service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 spreadsheetId = '1wNYw_VE9oCJENqtUUEnrRgK0qJWL9dMSgHkLXIAtSTw'
-rangeName = 'PrimaryTable!A:F'
+rangeName = 'PrimaryTable!A:G'
 
 def fetchData():
     creds = service_account.Credentials.from_service_account_file(
@@ -92,6 +92,7 @@ gb.configure_column('Status',width=80,cellEditor='agSelectCellEditor',cellEditor
 gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
 gb.configure_column('Analyst',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':teamList},rowDrag=False)
 gb.configure_column('Effort',width=65,rowDrag=False)
+gb.configure_column('Notes',width=400,rowDrag=False)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gb.configure_grid_options(rowDragManaged=True,
@@ -126,7 +127,7 @@ if dfall.equals(dfgo) == False:
     body = { 'values': goog }
     service.spreadsheets().values().update(
                                     spreadsheetId=spreadsheetId, 
-                                    range='PrimaryTable!A2:F',
+                                    range='PrimaryTable!A2:G',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
     
@@ -201,19 +202,20 @@ with st.form("newtask"):
    st.write("Add New Project")
    formName = st.text_input("Project")
    formAnalyst = st.text_input("Analyst")
+   formNotes = st.text_input("Notes")
 
    # Every form must have a submit button.
    submitted = st.form_submit_button("Submit")
-   definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort']
+   definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
    if submitted:
        st.write("Thanks!")
-       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0]).T
+       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0,formNotes]).T
        formdf.columns = definecols
        goog = formdf.values.tolist()
        body = { 'values': goog }
        service.spreadsheets().values().append(
                                                spreadsheetId=spreadsheetId, 
-                                               range='PrimaryTable!A2:F',
+                                               range='PrimaryTable!A2:G',
                                                valueInputOption='USER_ENTERED', 
                                                body=body).execute() 
        st.experimental_rerun()
