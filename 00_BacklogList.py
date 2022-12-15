@@ -108,7 +108,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=testbuild,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.MANUAL,#|GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,#|GridUpdateMode.SORTING_CHANGED|GridUpdateMode.SELECTION_CHANGED,
         # update_on=['cellValueChanged','rowDragEnd','gridReady','firstDataRendered','modelUpdated'],
         fit_columns_on_grid_load=True,
         theme='light', 
@@ -121,7 +121,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
 grid_response = displayTable(dfall)
 dfgo = grid_response['data']
 
-saveB = st.button('Save Order')
+saveB = st.checkbox('Save Order')
 
 if dfall.equals(dfgo) == False or saveB:
         dfall = grid_response['data']
