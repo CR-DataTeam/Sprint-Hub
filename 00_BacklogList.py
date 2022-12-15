@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 14 19:12:06 2022
-
-@author: joshua.mcdonald
-"""
-
 
 import pandas as pd
 import streamlit as st
@@ -35,61 +28,6 @@ st.markdown(sc.getCodeSnippet('adjustPaddingAndFont'), unsafe_allow_html=True)
 js = JsCode(sc.getCodeSnippet('jsCodeStr'))
 
 
-onRowDragEnd = JsCode("""
-function onRowDragEnd(e) {
-    console.log('onRowDragEnd', e);
-}
-""")
-
-getRowNodeId = JsCode("""
-function getRowNodeId(data) {
-    return data.id
-}
-""")
-
-onGridReady = JsCode("""
-function onGridReady() {
-    immutableStore.forEach(
-        function(data, index) {
-            data.id = index;
-            });
-    gridOptions.api.setRowData(immutableStore);
-    }
-""")
-
-onRowDragMove = JsCode("""
-function onRowDragMove(event) {
-    var movingNode = event.node;
-    var overNode = event.overNode;
-
-    var rowNeedsToMove = movingNode !== overNode;
-
-    if (rowNeedsToMove) {
-        var movingData = movingNode.data;
-        var overData = overNode.data;
-
-        immutableStore = newStore;
-
-        var fromIndex = immutableStore.indexOf(movingData);
-        var toIndex = immutableStore.indexOf(overData);
-
-        var newStore = immutableStore.slice();
-        moveInArray(newStore, fromIndex, toIndex);
-
-        immutableStore = newStore;
-        gridOptions.api.setRowData(newStore);
-
-        gridOptions.api.clearFocusedCell();
-    }
-
-    function moveInArray(arr, fromIndex, toIndex) {
-        var element = arr[fromIndex];
-        arr.splice(fromIndex, 1);
-        arr.splice(toIndex, 0, element);
-    }
-}
-""")
-
 ###############################################################################
 #### set-up basis for iteration
 ###############################################################################
@@ -101,7 +39,7 @@ creds = service_account.Credentials.from_service_account_file(
     
 service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 spreadsheetId = '1wNYw_VE9oCJENqtUUEnrRgK0qJWL9dMSgHkLXIAtSTw'
-rangeName = 'PrimaryTable!A:F'
+rangeName = 'PrimaryTable!A:G'
 
 def fetchData():
     creds = service_account.Credentials.from_service_account_file(
@@ -119,38 +57,75 @@ def fetchData():
 
 dfall = fetchData() 
 
-gb = GridOptionsBuilder.from_dataframe(dfall)
-gb.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = False, rowDragMultiRow=True)
-gb.configure_column('Sprint', rowDrag = True, rowDragEntireRow = True)
-gb.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd, deltaRowDataMode = True, getRowNodeId = getRowNodeId, onGridReady = onGridReady, animateRows = True, onRowDragMove = onRowDragMove)
-gridOptions = gb.build()
-data = AgGrid(
-    data=dfall,
-    editable=True,
-    gridOptions=gridOptions,
-    data_return_mode=DataReturnMode.AS_INPUT,
-    update_mode=GridUpdateMode.MANUAL, #VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
-    fit_columns_on_grid_load=True,
-    theme='light', 
-    height=750, 
-    allow_unsafe_jscode=True,
-    enable_enterprise_modules=True,
-    key='sprintBoardTableKey',
-    )      
+#for i in range(len(facilityList)):
+def displayTable(df: pd.DataFrame) -> AgGrid:
+    i = 0
+    
+    # gb.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = False, rowDragMultiRow=True)
+    # gb.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd, 
+        #deltaRowDataMode = True, getRowNodeId = getRowNodeId, onGridReady = onGridReady, animateRows = True, onRowDragMove = onRowDragMove)
+    # gridOptions = gb.build()
+    
+    testbuild = {
+    # enable Master / Detail
+    "enableRangeSelection": True,
+    "pagination": False,
+    # the first Column is configured to use agGroupCellRenderer
+    "columnDefs": [
+        {'field': 'Sprint', 'editable':True,'sort':'asc','rowDrag': True,'rowDragEntireRow': True,},
+        {'field': 'Project', 'width':250, 'editable':True,},
+        {'field': 'Status', 'width':125, 'editable':True,}, # 'pinned':'left',
+        {'field': 'ReceivedDate', 'editable':False,},
+        {'field': 'Analyst','editable':True,},
+        {'field': 'Points', 'editable':True,},
+    ],
+    "defaultColDef": {
+        "minColumnWidth": 75,
+        'filterable': True,
+        'sortable': True,
+        'editable': True,
+        'rowDrag': False,
+        'rowDragManaged': True,
+        'rowDragEntireRow': False,
+        'rowDragMultiRow': True,
+        'suppressMenu': False,
+    },
+    'rowDragManaged': True, 
+    # onRowDragEnd = onRowDragEnd, 
+    # deltaRowDataMode = True, 
+    # getRowNodeId = getRowNodeId, 
+    # onGridReady = onGridReady, 
+    # animateRows = True, 
+    # onRowDragMove = onRowDragMove
+    "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
+    }
+    
+    return AgGrid(
+        data=dfall,
+        editable=True,
+        gridOptions=testbuild,
+        data_return_mode=DataReturnMode.AS_INPUT,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
+        fit_columns_on_grid_load=True,
+        theme='light', 
+        height=525, 
+        allow_unsafe_jscode=True,
+        enable_enterprise_modules=True,
+        key='sprintBoardTableKey',
+        )      
 
-st.write(data['data'])
-saveButton = st.button("SAVE")
+grid_response = displayTable(dfall)
+dfgo = grid_response['data']
 
-if saveButton:
-    dfgo = data['data']
-    dfall = dfgo
-    goog = dfgo.values.tolist()
-    body = { 'values': goog }
-    service.spreadsheets().values().update(
-                                    spreadsheetId=spreadsheetId, 
-                                    range='PrimaryTable!A2:F',
-                                    valueInputOption='USER_ENTERED', 
-                                    body=body).execute()
+if dfall.equals(dfgo) == False:
+        dfall = dfgo
+        goog = dfgo.values.tolist()
+        body = { 'values': goog }
+        service.spreadsheets().values().update(
+                                        spreadsheetId=spreadsheetId, 
+                                        range='PrimaryTable!A2:G',
+                                        valueInputOption='USER_ENTERED', 
+                                        body=body).execute()
 
 
     
