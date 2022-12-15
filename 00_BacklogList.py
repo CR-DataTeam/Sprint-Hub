@@ -143,12 +143,18 @@ ucdfzh = ucdfz['Effort'].astype(int).sum()
 ucdfih = ucdfi['Effort'].astype(int).sum()
 ucdfmh = ucdfm['Effort'].astype(int).sum()
 
-if ucdfjh < 8:      joshStatus = "Healthy Capacity" 
-elif ucdfjh == 8:   joshStatus = "At Capacity" 
-else:               joshStatus = "Over-Capacity"
+if ucdfjh < 8:      
+    joshStatus = "Healthy Capacity" 
+    joshSC = 'green'
+elif ucdfjh == 8:   
+    joshStatus = "At Capacity" 
+    joshSC = 'yellow'
+else:               
+    joshStatus = "Over-Capacity"
+    joshSC = 'red'
 
 with st.sidebar:
-    st.markdown(body='Josh<br>'+joshStatus,unsafe_allow_html=True)
+    st.markdown(body='**Josh**<br><span style="color:'+joshSC+">"+joshStatus+"</span>",unsafe_allow_html=True)
     # st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
     # st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
     # st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
