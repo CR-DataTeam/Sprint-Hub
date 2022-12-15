@@ -92,7 +92,7 @@ gb.configure_column('Status',width=80,cellEditor='agSelectCellEditor',cellEditor
 gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
 gb.configure_column('Analyst',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':teamList},rowDrag=False)
 gb.configure_column('Effort',width=65,rowDrag=False)
-gb.configure_column('Notes',width=400,rowDrag=False)
+gb.configure_column('Notes',width=400,rowDrag=False,hide=True)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gb.configure_grid_options(rowDragManaged=True,
@@ -108,7 +108,7 @@ grid_response = AgGrid(
         gridOptions=gridOptions,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.MODEL_CHANGED,
-        #fit_columns_on_grid_load=True,
+        fit_columns_on_grid_load=True,
         enable_enterprise_modules=True,
         theme='light', 
         height=500, 
