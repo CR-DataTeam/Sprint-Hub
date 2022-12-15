@@ -119,41 +119,38 @@ def fetchData():
 
 dfall = fetchData() 
 
-#for i in range(len(facilityList)):
-def displayTable(df: pd.DataFrame) -> AgGrid:
-    gb = GridOptionsBuilder.from_dataframe(dfall)
-    gb.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = False, rowDragMultiRow=True)
-    gb.configure_column('Sprint', rowDrag = True, rowDragEntireRow = True)
-    gb.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd, deltaRowDataMode = True, getRowNodeId = getRowNodeId, onGridReady = onGridReady, animateRows = True, onRowDragMove = onRowDragMove)
-    gridOptions = gb.build()
-    return AgGrid(
-        data=dfall,
-        editable=True,
-        gridOptions=gridOptions,
-        data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
-        fit_columns_on_grid_load=True,
-        theme='light', 
-        height=750, 
-        allow_unsafe_jscode=True,
-        enable_enterprise_modules=True,
-        key='sprintBoardTableKey',
-        )      
+gb = GridOptionsBuilder.from_dataframe(dfall)
+gb.configure_default_column(rowDrag = False, rowDragManaged = True, rowDragEntireRow = False, rowDragMultiRow=True)
+gb.configure_column('Sprint', rowDrag = True, rowDragEntireRow = True)
+gb.configure_grid_options(rowDragManaged = True, onRowDragEnd = onRowDragEnd, deltaRowDataMode = True, getRowNodeId = getRowNodeId, onGridReady = onGridReady, animateRows = True, onRowDragMove = onRowDragMove)
+gridOptions = gb.build()
+data = AgGrid(
+    data=dfall,
+    editable=True,
+    gridOptions=gridOptions,
+    data_return_mode=DataReturnMode.AS_INPUT,
+    update_mode=GridUpdateMode.MANUAL, #VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
+    fit_columns_on_grid_load=True,
+    theme='light', 
+    height=750, 
+    allow_unsafe_jscode=True,
+    enable_enterprise_modules=True,
+    key='sprintBoardTableKey',
+    )      
 
-grid_response = displayTable(dfall)
-# st.write(grid_response['data'])
-dfgo = grid_response['data']
+st.write(data['data'])
 saveButton = st.button("SAVE")
 
 if saveButton:
-        dfall = dfgo
-        goog = dfgo.values.tolist()
-        body = { 'values': goog }
-        service.spreadsheets().values().update(
-                                        spreadsheetId=spreadsheetId, 
-                                        range='PrimaryTable!A2:F',
-                                        valueInputOption='USER_ENTERED', 
-                                        body=body).execute()
+    dfgo = data['data']
+    dfall = dfgo
+    goog = dfgo.values.tolist()
+    body = { 'values': goog }
+    service.spreadsheets().values().update(
+                                    spreadsheetId=spreadsheetId, 
+                                    range='PrimaryTable!A2:F',
+                                    valueInputOption='USER_ENTERED', 
+                                    body=body).execute()
 
 
     
