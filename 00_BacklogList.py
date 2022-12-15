@@ -184,7 +184,7 @@ else:
     michaelSC = 'red'
 
 with st.sidebar:
-    st.markdown(body='# Sprint 00 (ends 12/30)<br>',unsafe_allow_html=True)
+    st.markdown(body='**Sprint 00**<br>',unsafe_allow_html=True)
     st.markdown(body='**Josh**<br><span style="color:'+joshSC+'">'+joshStatus+'</span><br><sup>('+str(ucdfjh)+')</sup>',unsafe_allow_html=True)
     st.markdown(body='**Zimean**<br><span style="color:'+zimeanSC+'">'+zimeanStatus+'</span><br><sup>('+str(ucdfzh)+')</sup>',unsafe_allow_html=True)
     st.markdown(body='**Ian**<br><span style="color:'+ianSC+'">'+ianStatus+'</span><br><sup>('+str(ucdfih)+')</sup>',unsafe_allow_html=True)
