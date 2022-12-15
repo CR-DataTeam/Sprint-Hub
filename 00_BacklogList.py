@@ -112,7 +112,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         # update_on=['cellValueChanged','rowDragEnd','gridReady','firstDataRendered','modelUpdated'],
         fit_columns_on_grid_load=True,
         theme='light', 
-        height=750, 
+        height=600, 
         allow_unsafe_jscode=True,
         # enable_enterprise_modules=True,
         key='sprintBoardTableKey',
@@ -120,19 +120,8 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
 
 grid_response = displayTable(dfall)
 dfgo = grid_response['data']
-
-def checkboxRun():
-    dfall = grid_response['data']
-    goog = dfgo.values.tolist()
-    body = { 'values': goog }
-    service.spreadsheets().values().update(
-                                    spreadsheetId=spreadsheetId, 
-                                    range='PrimaryTable!A2:F',
-                                    valueInputOption='USER_ENTERED', 
-                                    body=body).execute()
-saveB = st.checkbox('Save Order',on_change=checkboxRun())
-
-
+idk = st.button('ye')
+if idk: st.experimental_rerun()
 
 if dfall.equals(dfgo) == False:
     dfall = grid_response['data']
