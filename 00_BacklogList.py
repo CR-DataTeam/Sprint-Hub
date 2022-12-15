@@ -64,17 +64,17 @@ gb.configure_default_column(rowDrag = True,
                             rowDragManaged = True, 
                             rowDragEntireRow = False, 
                             rowDragMultiRow=True,
-                            minColumnWidth=75,
+                            minColumnWidth=25,
                             filterable=True,
                             sortable=False,
                             editable=True,
                             suppressMenu=False,)
-gb.configure_column('Sprint',cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown}, width=125,rowDrag = True, rowDragEntireRow = True)
+gb.configure_column('Sprint',cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown}, width=190,rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400) 
-gb.configure_column('Status',width=100) 
-gb.configure_column('ReceivedDate',width=125) 
-gb.configure_column('Analyst',width=175)
-gb.configure_column('Effort',width=100,rowDrag=False)
+gb.configure_column('Status',width=80,rowDrag=False) 
+gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
+gb.configure_column('Analyst',width=125,rowDrag=False)
+gb.configure_column('Effort',width=65,rowDrag=False)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gb.configure_grid_options(rowDragManaged=True,
