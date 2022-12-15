@@ -126,7 +126,7 @@ sbEff = sidebar_track_df['Effort'].astype(int).sum()
 
 
 with st.sidebar:
-    st.metric('Josh - \nNext Sprint',value=sbEff,delta=8-int(sbEff),)#delta_color=)
+    st.metric('Josh - \r\nNext Sprint',value=sbEff,delta=8-int(sbEff),)#delta_color=)
 
     
     
