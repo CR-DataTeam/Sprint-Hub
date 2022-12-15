@@ -121,10 +121,10 @@ if dfall.equals(dfgo) == False:
     
 
 ucdfa = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
-ucdfj = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Joshua McDonald']
-ucdfz = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Zimean Vickers']
-ucdfi = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Ian Stewart']
-ucdfm = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Michael Gallemore']
+ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
+ucdfz = ucdfa[ucdfa['Analyst']=='Zimean Vickers']
+ucdfi = ucdfa[ucdfa['Analyst']=='Ian Stewart']
+ucdfm = ucdfa[ucdfa['Analyst']=='Michael Gallemore']
 
 ucdfah = ucdfa['Effort'].astype(int).sum()
 ucdfjh = ucdfj['Effort'].astype(int).sum()
