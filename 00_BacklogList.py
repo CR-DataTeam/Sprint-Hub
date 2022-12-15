@@ -15,7 +15,6 @@ st.set_page_config(
 
 st.markdown(sc.getCodeSnippet('sidebarWidth'), unsafe_allow_html=True)
 st.markdown(sc.getCodeSnippet('hideStreamlitStyle'), unsafe_allow_html=True)
-st.markdown(sc.getCodeSnippet('adjustPaddingAndFont'), unsafe_allow_html=True)
 js = JsCode(sc.getCodeSnippet('jsCodeStr'))
 
 ###############################################################################
@@ -109,8 +108,8 @@ if dfall.equals(dfgo) == False:
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 
-idk = st.button('ye')
-if idk: st.experimental_rerun()
+st.sidebar.button('ye')
+
     
     
     
