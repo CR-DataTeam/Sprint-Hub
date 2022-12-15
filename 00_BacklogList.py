@@ -120,13 +120,25 @@ if dfall.equals(dfgo) == False:
                                     body=body).execute()
     
 
-sidebar_track_df = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
-sbEff = sidebar_track_df['Effort'].astype(int).sum()
+ucdfa = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
+ucdfj = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Joshua McDonald']
+ucdfz = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Zimean Vickers']
+ucdfi = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Ian Stewart']
+ucdfm = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)' and dfgo['Analyst']=='Michael Gallemore']
 
+ucdfah = ucdfa['Effort'].astype(int).sum()
+ucdfjh = ucdfj['Effort'].astype(int).sum()
+ucdfzh = ucdfz['Effort'].astype(int).sum()
+ucdfih = ucdfi['Effort'].astype(int).sum()
+ucdfmh = ucdfm['Effort'].astype(int).sum()
 
 
 with st.sidebar:
-    st.metric('Josh - \r\nNext Sprint',value=sbEff,delta=8-int(sbEff),)#delta_color=)
+    st.metric('Josh',value=ucdfjh,delta=8-int(ucdfjh),)
+    st.metric('Zimean',value=ucdfzh,delta=8-int(ucdfzh),)
+    st.metric('Ian',value=ucdfih,delta=8-int(ucdfih),)
+    st.metric('Michael',value=ucdfmh,delta=8-int(ucdfmh),)
+    st.metric('TEAM TOTAL',value=ucdfah,delta=32-int(ucdfah),)
 
     
     
