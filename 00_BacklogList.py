@@ -140,12 +140,6 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         key='sprintBoardTableKey',
         )      
 
-data = AgGrid(data,
-            gridOptions=gridOptions,
-            allow_unsafe_jscode=True,
-            update_mode=GridUpdateMode.MANUAL
-)
-
 grid_response = displayTable(dfall)
 st.write(grid_response['data'])
 dfgo = grid_response['data']
