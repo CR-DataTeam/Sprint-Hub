@@ -145,11 +145,11 @@ ucdfmh = ucdfm['Effort'].astype(int).sum()
 
 
 with st.sidebar:
-    st.metric('Josh',value=ucdfjh,delta=8-int(ucdfjh),)
-    st.metric('Zimean',value=ucdfzh,delta=8-int(ucdfzh),)
-    st.metric('Ian',value=ucdfih,delta=8-int(ucdfih),)
-    st.metric('Michael',value=ucdfmh,delta=8-int(ucdfmh),)
-    st.metric('TEAM TOTAL',value=ucdfah,delta=32-int(ucdfah),)
+    st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
+    st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
+    st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
+    st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
+    st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
     
     
