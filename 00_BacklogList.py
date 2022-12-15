@@ -131,7 +131,7 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         editable=True,
         gridOptions=gridOptions,
         data_return_mode=DataReturnMode.AS_INPUT,
-        update_mode=GridUpdateMode.MANUAL,            #GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
+        update_mode=GridUpdateMode.VALUE_CHANGED|GridUpdateMode.FILTERING_CHANGED,
         fit_columns_on_grid_load=True,
         theme='light', 
         height=750, 
@@ -140,7 +140,14 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         key='sprintBoardTableKey',
         )      
 
+data = AgGrid(data,
+            gridOptions=gridOptions,
+            allow_unsafe_jscode=True,
+            update_mode=GridUpdateMode.MANUAL
+)
+
 grid_response = displayTable(dfall)
+st.write(grid_response['data'])
 dfgo = grid_response['data']
 
 if dfall.equals(dfgo) == False:
