@@ -159,9 +159,10 @@ with st.form("newtask"):
 
    # Every form must have a submit button.
    submitted = st.form_submit_button("Submit")
+   definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort']
    if submitted:
        st.write("Thanks!")
-       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0])
+       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0],columns=definecols)
        goog = formdf.values.tolist()
        body = { 'values': goog }
        service.spreadsheets().values().append(
