@@ -152,9 +152,43 @@ elif ucdfjh == 8:
 else:               
     joshStatus = "Over-Capacity"
     joshSC = 'red'
+    
+if ucdfzh < 8:      
+    zimeanStatus = "Healthy Capacity" 
+    zimeanSC = 'green'
+elif ucdfzh == 8:   
+    zimeanStatus = "At Capacity" 
+    zimeanSC = 'yellow'
+else:               
+    zimeanStatus = "Over-Capacity"
+    zimeanSC = 'red'
+    
+if ucdfih < 8:      
+    ianStatus = "Healthy Capacity" 
+    ianSC = 'green'
+elif ucdfih == 8:   
+    ianStatus = "At Capacity" 
+    ianSC = 'yellow'
+else:               
+    ianStatus = "Over-Capacity"
+    ianSC = 'red'
+    
+if ucdfmh < 8:      
+    michaelStatus = "Healthy Capacity" 
+    michaelSC = 'green'
+elif ucdfmh == 8:   
+    michaelStatus = "At Capacity" 
+    michaelSC = 'yellow'
+else:               
+    michaelStatus = "Over-Capacity"
+    michaelSC = 'red'
 
 with st.sidebar:
     st.markdown(body='**Josh**<br><span style="color:'+joshSC+'">'+joshStatus+'</span><br><sup>('+str(ucdfjh)+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Zimean**<br><span style="color:'+zimeanSC+'">'+zimeanStatus+'</span><br><sup>('+str(ucdfzh)+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Ian**<br><span style="color:'+ianSC+'">'+ianStatus+'</span><br><sup>('+str(ucdfih)+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Michael**<br><span style="color:'+michaelSC+'">'+michaelStatus+'</span><br><sup>('+str(ucdfmh)+')</sup>',unsafe_allow_html=True)
+    
     # st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
     # st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
     # st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
