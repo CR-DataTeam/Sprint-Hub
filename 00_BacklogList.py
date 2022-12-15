@@ -78,8 +78,8 @@ gb.configure_default_column(rowDrag = True,
 gb.configure_column('Sprint',width=175,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400) 
 gb.configure_column('Status',width=80,rowDrag=False) 
-gb.configure_column('ReceivedDate',width=110,rowDrag=False) 
-gb.configure_column('Analyst',width=110,rowDrag=False)
+gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
+gb.configure_column('Analyst',width=90,rowDrag=False)
 gb.configure_column('Effort',width=65,rowDrag=False)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
@@ -119,7 +119,7 @@ if dfall.equals(dfgo) == False:
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 sidebar_track_df = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
-sbEff = sidebar_track_df['Effort'].sum()
+sbEff = sidebar_track_df['Effort'].astype(int).sum()
 with st.sidebar:
     st.metric('Upcoming Sprint',value=sbEff,delta=32-int(sbEff),)#delta_color=)
 
