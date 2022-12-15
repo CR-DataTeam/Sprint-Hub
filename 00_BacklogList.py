@@ -75,12 +75,12 @@ gb.configure_default_column(rowDrag = True,
                             sortable=False,
                             editable=True,
                             suppressMenu=False,)
-gb.configure_column('Sprint',width=325,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
+gb.configure_column('Sprint',width=175,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400) 
 gb.configure_column('Status',width=80,rowDrag=False) 
-gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
-gb.configure_column('Analyst',width=125,rowDrag=False)
-gb.configure_column('Effort',width=50,rowDrag=False)
+gb.configure_column('ReceivedDate',width=110,rowDrag=False) 
+gb.configure_column('Analyst',width=110,rowDrag=False)
+gb.configure_column('Effort',width=65,rowDrag=False)
 gb.configure_side_bar()
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gb.configure_grid_options(rowDragManaged=True,
@@ -118,8 +118,10 @@ if dfall.equals(dfgo) == False:
                                     range='PrimaryTable!A2:F',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
-
-# st.sidebar.button('ye')
+sidebar_track_df = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
+sbEff = sidebar_track_df['Effort']
+with st.sidebar:
+    sbEff
 
     
     
