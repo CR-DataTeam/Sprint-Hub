@@ -141,10 +141,11 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
         )      
 
 grid_response = displayTable(dfall)
-st.write(grid_response['data'])
+# st.write(grid_response['data'])
 dfgo = grid_response['data']
+saveButton = st.button("SAVE")
 
-if dfall.equals(dfgo) == False:
+if saveButton:
         dfall = dfgo
         goog = dfgo.values.tolist()
         body = { 'values': goog }
