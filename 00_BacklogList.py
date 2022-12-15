@@ -155,7 +155,7 @@ with st.sidebar:
 with st.form("newtask"):
    st.write("Add New Project")
    formName = st.slider("Project")
-   formAnalyst = st.checkbox("Form checkbox")
+   formAnalyst = st.text_input("Analyst")
 
    # Every form must have a submit button.
    submitted = st.form_submit_button("Submit")
