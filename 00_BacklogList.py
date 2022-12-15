@@ -27,7 +27,60 @@ st.markdown(sc.getCodeSnippet('hideStreamlitStyle'), unsafe_allow_html=True)
 st.markdown(sc.getCodeSnippet('adjustPaddingAndFont'), unsafe_allow_html=True)
 js = JsCode(sc.getCodeSnippet('jsCodeStr'))
 
+onRowDragEnd = JsCode("""
+function onRowDragEnd(e) {
+    console.log('onRowDragEnd', e);
+}
+""")
 
+getRowNodeId = JsCode("""
+function getRowNodeId(data) {
+    return data.id
+}
+""")
+
+onGridReady = JsCode("""
+function onGridReady() {
+    immutableStore.forEach(
+        function(data, index) {
+            data.id = index;
+            });
+    gridOptions.api.setRowData(immutableStore);
+    }
+""")
+
+onRowDragMove = JsCode("""
+function onRowDragMove(event) {
+    var movingNode = event.node;
+    var overNode = event.overNode;
+
+    var rowNeedsToMove = movingNode !== overNode;
+
+    if (rowNeedsToMove) {
+        var movingData = movingNode.data;
+        var overData = overNode.data;
+
+        immutableStore = newStore;
+
+        var fromIndex = immutableStore.indexOf(movingData);
+        var toIndex = immutableStore.indexOf(overData);
+
+        var newStore = immutableStore.slice();
+        moveInArray(newStore, fromIndex, toIndex);
+
+        immutableStore = newStore;
+        gridOptions.api.setRowData(newStore);
+
+        gridOptions.api.clearFocusedCell();
+    }
+
+    function moveInArray(arr, fromIndex, toIndex) {
+        var element = arr[fromIndex];
+        arr.splice(fromIndex, 1);
+        arr.splice(toIndex, 0, element);
+    }
+}
+""")
 ###############################################################################
 #### set-up basis for iteration
 ###############################################################################
@@ -95,12 +148,12 @@ def displayTable(df: pd.DataFrame) -> AgGrid:
     'rowDragEntireRow': True,
     'rowDragMultiRow': True,
     'rowDrag':True,
-    # onRowDragEnd = onRowDragEnd, 
-    # deltaRowDataMode = True, 
-    # getRowNodeId = getRowNodeId, 
-    # onGridReady = onGridReady, 
-    # animateRows = True, 
-    # onRowDragMove = onRowDragMove
+    'onRowDragEnd': onRowDragEnd, 
+    'deltaRowDataMode': True, 
+    'getRowNodeId': getRowNodeId, 
+    'onGridReady': onGridReady, 
+    'animateRows': True, 
+    'onRowDragMove': onRowDragMove,
     "onCellValueChanged":"--x_x--0_0-- function(e) { let api = e.api; let rowIndex = e.rowIndex; let col = e.column.colId; let rowNode = api.getDisplayedRowAtIndex(rowIndex); api.flashCells({ rowNodes: [rowNode], columns: [col], flashDelay: 10000000000 }); }; --x_x--0_0--"
     }
     
