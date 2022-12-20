@@ -198,28 +198,30 @@ with st.sidebar:
     # st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
     # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
-    
-with st.form("newtask"):
-   st.write("Add New Project")
-   formName = st.text_input("Project")
-   formAnalyst = st.text_input("Analyst")
-   formNotes = st.text_input("Notes")
-
-   # Every form must have a submit button.
-   submitted = st.form_submit_button("Submit")
-   definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
-   if submitted:
-       st.write("Thanks! Please refresh to see your item added at the bottom.")
-       formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0,formNotes]).T
-       formdf.columns = definecols
-       goog = formdf.values.tolist()
-       body = { 'values': goog }
-       service.spreadsheets().values().append(
-                                               spreadsheetId=spreadsheetId, 
-                                               range='PrimaryTable!A2:G',
-                                               valueInputOption='USER_ENTERED', 
-                                               body=body).execute() 
-       st.experimental_rerun()
+bcol1, bcol2 = st.columns([1,1])
+with bcol1: 
+    with st.expander('Add New Project',expanded=False):    
+        with st.form("newtask"):
+           st.write("Add New Project")
+           formName = st.text_input("Project")
+           formAnalyst = st.text_input("Analyst")
+           formNotes = st.text_input("Notes")
+        
+           # Every form must have a submit button.
+           submitted = st.form_submit_button("Submit")
+           definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
+           if submitted:
+               st.write("Thanks! Please refresh to see your item added at the bottom.")
+               formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0,formNotes]).T
+               formdf.columns = definecols
+               goog = formdf.values.tolist()
+               body = { 'values': goog }
+               service.spreadsheets().values().append(
+                                                       spreadsheetId=spreadsheetId, 
+                                                       range='PrimaryTable!A2:G',
+                                                       valueInputOption='USER_ENTERED', 
+                                                       body=body).execute() 
+               st.experimental_rerun()
     
     
     
