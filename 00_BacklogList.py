@@ -7,6 +7,10 @@ import datetime
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import strConstants as sc
+from datetime import date
+
+today = date.today()
+todayfmt = today.strftime("%Y-%m-%d")
 
 st.set_page_config(
      page_title="Sprint Board",
@@ -65,9 +69,11 @@ dfall = fetchData()
 ############################################################
 sprintDropDown=('not prioritized',
                 'Sprint TBD',
-                'Sprint 00 (ends 12/30)',
-                'Sprint 01 (ends 01/13)',
-                'Sprint 02 (ends 01/27)')
+                'Sprint 00',
+                'Sprint 01 (ends 01/20)',
+                'Sprint 02 (ends 02/03)',
+                'Sprint 03 (ends 02/17)',
+                'Sprint 04 (ends 03/03)',)
 
 teamList=('Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore')
 
@@ -202,7 +208,6 @@ bcol1, bcol2 = st.columns([1,1])
 with bcol1: 
     with st.expander('Add New Project',expanded=False):    
         with st.form("newtask"):
-           st.write("Add New Project")
            formName = st.text_input("Project")
            formAnalyst = st.text_input("Analyst")
            formNotes = st.text_input("Notes")
@@ -212,7 +217,7 @@ with bcol1:
            definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
            if submitted:
                st.write("Thanks! Please refresh to see your item added at the bottom.")
-               formdf = pd.DataFrame(['not prioritized', formName, 'Open', '2022-12-15', formAnalyst, 0,formNotes]).T
+               formdf = pd.DataFrame(['not prioritized', formName, 'Open', todayfmt, formAnalyst, 0,formNotes]).T
                formdf.columns = definecols
                goog = formdf.values.tolist()
                body = { 'values': goog }
