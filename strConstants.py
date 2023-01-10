@@ -4,15 +4,15 @@ Created on Sat Aug  6 12:10:50 2022
 
 @author: joshua.mcdonald
 """
-
+# Originally 165px:
 sidebarWidth = """
      <style>
      [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
-         width: 165px;
+         width: 225px;
        }
        [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
-           width: 165px;
-           margin-left: -165px;
+           width: 225px;
+           margin-left: -225px;
         }
         </style>
         """
