@@ -230,9 +230,9 @@ with st.sidebar:
     # st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
     # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
-bcol1, bcol2 = st.columns([1,1])
-#with bcol1: 
-    #
+joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
+with joshcol: 
+    dfgo.groupby('Sprint')['Effort'].sum()
     
     
     
