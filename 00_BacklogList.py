@@ -232,7 +232,7 @@ with st.sidebar:
 
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
 with joshcol: 
-    josheff = dfgo.groupby('Sprint')['Effort'].sum()
+    josheff = dfall.groupby('Sprint')['Effort'].sum()
 
     
     
