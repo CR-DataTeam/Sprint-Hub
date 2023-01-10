@@ -68,7 +68,7 @@ adjustPaddingAndFont = """
                .css-13eon2a {
                     font-size: 0.75rem;
                 }
-               .css-1lyfh1r {
+               .css-79elbk {
                     font-size: 0.75rem;
                 }
         </style>
