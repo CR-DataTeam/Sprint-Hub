@@ -75,7 +75,7 @@ sprintDropDown=('not prioritized',
                 'Sprint 03 (ends 03/03)',
                 'Sprint 04 (ends 03/17)',)
 
-requestorList=('Ops - Mamm'
+requestorList=('','Ops - Mamm'
 , 'Ops - CIS'
 , 'Ops - Vein'
 , 'Ops - IR'
