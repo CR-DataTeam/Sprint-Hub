@@ -8,11 +8,11 @@ Created on Sat Aug  6 12:10:50 2022
 sidebarWidth = """
      <style>
      [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
-         width: 225px;
+         width: 250px;
        }
        [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
-           width: 225px;
-           margin-left: -225px;
+           width: 250px;
+           margin-left: -250px;
         }
         </style>
         """

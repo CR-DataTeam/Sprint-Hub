@@ -65,6 +65,9 @@ def fetchData():
 
 dfall = fetchData() 
 
+dfCurrent = dfall[dfall.Status!='On Hold']
+dfOnHold = dfall[dfall.Status=='On Hold']
+
 
 ############################################################
 sprintDropDown=('not prioritized',
@@ -82,7 +85,7 @@ taskStatus=('Open','Closed','Blocked','On Hold')
 
 ############################################################
 
-gb = GridOptionsBuilder.from_dataframe(dfall)
+gb = GridOptionsBuilder.from_dataframe(dfCurrent)
 gb.configure_default_column(rowDrag = True, 
                             rowDragManaged = True, 
                             rowDragEntireRow = False, 
@@ -90,7 +93,7 @@ gb.configure_default_column(rowDrag = True,
                             minColumnWidth=50,
                             filterable=True,
                             sortable=False,
-                            editable=True,
+                            editable=False,
                             suppressMenu=False,)
 gb.configure_column('Sprint',width=175,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400,rowDrag=False) 
@@ -110,7 +113,7 @@ gb.configure_grid_options(rowDragManaged=True,
 gridOptions = gb.build()
 
 grid_response = AgGrid(
-        data=dfall,
+        data=dfCurrent,
         gridOptions=gridOptions,
         data_return_mode=DataReturnMode.AS_INPUT,
         update_mode=GridUpdateMode.MODEL_CHANGED,
@@ -123,9 +126,8 @@ grid_response = AgGrid(
         custom_css=custom_css
         )      
 
-
-dfgo = grid_response['data']
-
+dfgoo = grid_response['data']
+dfgo = pd.concat(dfgoo,dfOnHold)
 
 if dfall.equals(dfgo) == False:
     dfall = grid_response['data']
@@ -211,28 +213,8 @@ with st.sidebar:
     # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
 bcol1, bcol2 = st.columns([1,1])
-with bcol1: 
-    with st.expander('Add New Project',expanded=False):    
-        with st.form("newtask"):
-           formName = st.text_input("Project")
-           formAnalyst = st.text_input("Analyst")
-           formNotes = st.text_input("Notes")
-        
-           # Every form must have a submit button.
-           submitted = st.form_submit_button("Submit")
-           definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
-           if submitted:
-               st.write("Thanks! Please refresh to see your item added at the bottom.")
-               formdf = pd.DataFrame(['not prioritized', formName, 'Open', todayfmt, formAnalyst, 0,formNotes]).T
-               formdf.columns = definecols
-               goog = formdf.values.tolist()
-               body = { 'values': goog }
-               service.spreadsheets().values().append(
-                                                       spreadsheetId=spreadsheetId, 
-                                                       range='PrimaryTable!A2:G',
-                                                       valueInputOption='USER_ENTERED', 
-                                                       body=body).execute() 
-               st.experimental_rerun()
+#with bcol1: 
+    #
     
     
     
