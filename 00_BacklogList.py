@@ -78,6 +78,23 @@ sprintDropDown=('not prioritized',
                 'Sprint 03 (ends 03/03)',
                 'Sprint 04 (ends 03/17)',)
 
+requestorList=('Ops - Mamm'
+, 'Ops - CIS'
+, 'Ops - Vein'
+, 'Ops - IR'
+, 'Ops - General'
+, 'Prof Svcs - Hospital'
+, 'Prof Svcs - OC'
+, 'Prof Svcs - General'
+, 'FxA - Finance'
+, 'FxA - Quality'
+, 'FxA - Marketing'
+, 'FxA - HR'
+, 'USRS - Corporate'
+, 'USRS - UCR'
+, 'Other'
+    )
+
 teamList=('Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore')
 
 taskStatus=('Open','Closed','Blocked','On Hold')
@@ -99,7 +116,7 @@ gb.configure_column('Sprint',width=175,cellEditor='agSelectCellEditor',cellEdito
 gb.configure_column('Project',width=400,rowDrag=False) 
 gb.configure_column('Status',width=80,cellEditor='agSelectCellEditor',cellEditorParams={'values':taskStatus},rowDrag=False) 
 gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
-gb.configure_column('Requestor',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':teamList},rowDrag=False)
+gb.configure_column('Requestor',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':requestorList},rowDrag=False)
 gb.configure_column('Analyst',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':teamList},rowDrag=False)
 gb.configure_column('Effort',width=65,rowDrag=False)
 gb.configure_column('Notes',width=400,rowDrag=False,hide=True)
