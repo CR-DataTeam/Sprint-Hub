@@ -127,7 +127,7 @@ grid_response = AgGrid(
         )      
 
 dfgoo = grid_response['data']
-dfgo = pd.concat(dfgoo,dfOnHold)
+dfgo = pd.concat([dfgoo,dfOnHold])
 
 if dfall.equals(dfgo) == False:
     dfall = grid_response['data']
