@@ -70,10 +70,10 @@ dfall = fetchData()
 sprintDropDown=('not prioritized',
                 'Sprint TBD',
                 'Sprint 00',
-                'Sprint 01 (ends 01/20)',
-                'Sprint 02 (ends 02/03)',
-                'Sprint 03 (ends 02/17)',
-                'Sprint 04 (ends 03/03)',)
+                'Sprint 01 (ends 02/03)',
+                'Sprint 02 (ends 02/17)',
+                'Sprint 03 (ends 03/03)',
+                'Sprint 04 (ends 03/17)',)
 
 teamList=('Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore')
 
@@ -138,6 +138,12 @@ if dfall.equals(dfgo) == False:
                                     body=body).execute()
 # selectedTest = grid_response['selected_rows']
 # print(selectedTest)    
+
+with st.sidebar:
+    SprintFilter = st.selectbox('Viewing Sprint:',sprintDropDown)
+
+TeamShortNameList = ['Josh','Zimean','Ian','Michael']
+TeamLongNameList = ['Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore']
 
 ucdfa = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
