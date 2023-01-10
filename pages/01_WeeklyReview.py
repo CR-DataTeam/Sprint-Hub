@@ -151,7 +151,7 @@ if dfall.equals(dfgo) == False:
     body = { 'values': goog }
     service.spreadsheets().values().update(
                                     spreadsheetId=spreadsheetId, 
-                                    range='PrimaryTable!A2:G',
+                                    range='PrimaryTable!A2:H',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 # selectedTest = grid_response['selected_rows']
