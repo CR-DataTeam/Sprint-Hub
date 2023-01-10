@@ -16,13 +16,13 @@ sidebarWidth = """
         }
         </style>
         """
-
+# Under footer line:
+#     .sidebar-text {
+#         font-size: 0.75rem;
 hideStreamlitStyle = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
-.sidebar-text {
-    font-size: 0.75rem;
 }
 </style>
 
