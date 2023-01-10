@@ -233,6 +233,7 @@ with st.sidebar:
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
 with joshcol: 
     dfgo.groupby('Sprint')['Effort'].sum()
+    print('test')
     
     
     
