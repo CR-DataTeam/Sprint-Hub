@@ -26,7 +26,7 @@ st.markdown(f""" <style>
     }} </style> """, unsafe_allow_html=True)
     
 custom_css = {
-    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "10px !important",}}
+    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "11px !important",}}
     # "font-family": "Roboto, sans-serif !important;"},
     #".ag-header-cell-text": {"color": "#495057 !important;"},
     # }    
@@ -47,7 +47,7 @@ creds = service_account.Credentials.from_service_account_file(
     
 service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 spreadsheetId = '1wNYw_VE9oCJENqtUUEnrRgK0qJWL9dMSgHkLXIAtSTw'
-rangeName = 'PrimaryTable!A:G'
+rangeName = 'PrimaryTable!A:H'
 
 def fetchData():
     creds = service_account.Credentials.from_service_account_file(
@@ -99,6 +99,7 @@ gb.configure_column('Sprint',width=175,cellEditor='agSelectCellEditor',cellEdito
 gb.configure_column('Project',width=400,rowDrag=False) 
 gb.configure_column('Status',width=80,cellEditor='agSelectCellEditor',cellEditorParams={'values':taskStatus},rowDrag=False) 
 gb.configure_column('ReceivedDate',width=90,rowDrag=False) 
+gb.configure_column('Requestor',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':teamList},rowDrag=False)
 gb.configure_column('Analyst',width=90,cellEditor='agSelectCellEditor',cellEditorParams={'values':teamList},rowDrag=False)
 gb.configure_column('Effort',width=65,rowDrag=False)
 gb.configure_column('Notes',width=400,rowDrag=False,hide=True)
@@ -135,7 +136,7 @@ if dfall.equals(dfgo) == False:
     body = { 'values': goog }
     service.spreadsheets().values().update(
                                     spreadsheetId=spreadsheetId, 
-                                    range='PrimaryTable!A2:G',
+                                    range='PrimaryTable!A2:H',
                                     valueInputOption='USER_ENTERED', 
                                     body=body).execute()
 # selectedTest = grid_response['selected_rows']

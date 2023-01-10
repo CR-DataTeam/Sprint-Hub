@@ -47,7 +47,7 @@ creds = service_account.Credentials.from_service_account_file(
     
 service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
 spreadsheetId = '1wNYw_VE9oCJENqtUUEnrRgK0qJWL9dMSgHkLXIAtSTw'
-rangeName = 'PrimaryTable!A:G'
+rangeName = 'PrimaryTable!A:H'
 
 def fetchData():
     creds = service_account.Credentials.from_service_account_file(
@@ -229,7 +229,7 @@ with bcol1:
                body = { 'values': goog }
                service.spreadsheets().values().append(
                                                        spreadsheetId=spreadsheetId, 
-                                                       range='PrimaryTable!A2:G',
+                                                       range='PrimaryTable!A2:H',
                                                        valueInputOption='USER_ENTERED', 
                                                        body=body).execute() 
                st.experimental_rerun()
