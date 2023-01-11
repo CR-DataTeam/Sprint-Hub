@@ -167,6 +167,9 @@ TeamLongNameList = ['Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Ga
 
 ucdfa = dfgo    #[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
+
+"""
+ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
 ucdfz = ucdfa[ucdfa['Analyst']=='Zimean Vickers']
 ucdfi = ucdfa[ucdfa['Analyst']=='Ian Stewart']
 ucdfm = ucdfa[ucdfa['Analyst']=='Michael Gallemore']
@@ -229,6 +232,7 @@ with st.sidebar:
     # st.metric('Ian -----------',value=ucdfih,delta=8-int(ucdfih),)
     # st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
     # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
+"""
 
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
 with joshcol:  #dfall
