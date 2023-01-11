@@ -165,7 +165,7 @@ with st.sidebar:
 TeamShortNameList = ['Josh','Zimean','Ian','Michael']
 TeamLongNameList = ['Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore']
 
-ucdfa = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
+ucdfa = dfgo    #[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
 ucdfz = ucdfa[ucdfa['Analyst']=='Zimean Vickers']
 ucdfi = ucdfa[ucdfa['Analyst']=='Ian Stewart']
