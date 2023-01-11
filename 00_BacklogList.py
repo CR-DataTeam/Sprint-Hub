@@ -233,6 +233,6 @@ with st.sidebar:
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
 with joshcol: 
     josheff = dfall.groupby('Sprint')['Effort'].sum()
-
+    st.dataframe(josheff)
     
     
