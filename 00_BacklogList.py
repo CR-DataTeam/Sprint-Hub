@@ -232,7 +232,7 @@ with st.sidebar:
 
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
 with joshcol:  #dfall
-    ucdfj['Effort'] = ucdfj['Effort'].apply(lambda x: int(x))
+    ucdfj['Effort'] = ucdfj['Effort'].apply(lambda x: float(x))
     josheff = ucdfj.groupby('Sprint')['Effort'].sum()
     st.dataframe(josheff)
     
