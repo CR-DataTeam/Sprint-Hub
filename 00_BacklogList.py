@@ -231,8 +231,8 @@ with st.sidebar:
     # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
-with joshcol: 
-    josheff = dfall.groupby('Sprint')['Effort'].sum()
+with joshcol:  #dfall
+    josheff = ucdfj.groupby('Sprint')['Effort'].astype(int).sum()
     st.dataframe(josheff)
     
     
