@@ -110,7 +110,7 @@ gb.configure_default_column(rowDrag = True,
                             minColumnWidth=50,
                             filterable=True,
                             sortable=False,
-                            editable=False,
+                            editable=True,
                             suppressMenu=False,)
 gb.configure_column('Sprint',width=175,cellEditor='agSelectCellEditor',cellEditorParams={'values':sprintDropDown},rowDrag = True, rowDragEntireRow = True)
 gb.configure_column('Project',width=400,rowDrag=False) 
