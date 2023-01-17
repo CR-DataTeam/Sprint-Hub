@@ -167,6 +167,9 @@ TeamLongNameList = ['Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Ga
 
 ucdfa = dfgo    #[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
+ucdfz = ucdfa[ucdfa['Analyst']=='Zimean Vickers']
+ucdfi = ucdfa[ucdfa['Analyst']=='Ian Stewart']
+ucdfm = ucdfa[ucdfa['Analyst']=='Michael Gallemore']
 
 
 # ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
@@ -236,8 +239,25 @@ ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
 
 joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
 with joshcol:  #dfall
+    st.markdown("Josh Outlook")
     ucdfj['Effort'] = ucdfj['Effort'].apply(lambda x: float(x))
     josheff = ucdfj.groupby('Sprint')['Effort'].sum()
     st.dataframe(josheff)
+with zimeancol:  #dfall
+    st.markdown("Zimean Outlook")
+    ucdfz['Effort'] = ucdfz['Effort'].apply(lambda x: float(x))
+    zimeaneff = ucdfz.groupby('Sprint')['Effort'].sum()
+    st.dataframe(zimeaneff)
+with iancol:  #dfall
+    st.markdown("Ian Outlook")
+    ucdfi['Effort'] = ucdfi['Effort'].apply(lambda x: float(x))
+    ianeff = ucdfi.groupby('Sprint')['Effort'].sum()
+    st.dataframe(ianeff)
+with michaelcol:  #dfall
+    st.markdown("Michael Outlook")
+    ucdfm['Effort'] = ucdfm['Effort'].apply(lambda x: float(x))
+    michaeleff = ucdfm.groupby('Sprint')['Effort'].sum()
+    st.dataframe(michaeleff)
+
     
     
