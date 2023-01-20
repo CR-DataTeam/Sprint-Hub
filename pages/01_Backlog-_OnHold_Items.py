@@ -26,7 +26,7 @@ st.markdown(f""" <style>
     }} </style> """, unsafe_allow_html=True)
     
 custom_css = {
-    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "11px !important",}}
+    ".ag-root.ag-unselectable.ag-layout-normal": {"font-size": "10px !important",}}
     # "font-family": "Roboto, sans-serif !important;"},
     #".ag-header-cell-text": {"color": "#495057 !important;"},
     # }    
@@ -65,9 +65,6 @@ def fetchData():
 
 dfall = fetchData() 
 
-# dfCurrent = dfall[dfall.Status!='On Hold']
-# dfOnHold = dfall[dfall.Status=='On Hold']
-
 
 ############################################################
 sprintDropDown=('not prioritized',
@@ -78,7 +75,7 @@ sprintDropDown=('not prioritized',
                 'Sprint 03 (ends 03/03)',
                 'Sprint 04 (ends 03/17)',)
 
-requestorList=('Ops - Mamm'
+requestorList=('','Ops - Mamm'
 , 'Ops - CIS'
 , 'Ops - Vein'
 , 'Ops - IR'
@@ -144,9 +141,9 @@ grid_response = AgGrid(
         custom_css=custom_css
         )      
 
+
 dfgo = grid_response['data']
-# dfgoo = grid_response['data']
-# dfgo = pd.concat([dfgoo,dfOnHold])
+
 
 if dfall.equals(dfgo) == False:
     dfall = grid_response['data']
@@ -166,70 +163,64 @@ with st.sidebar:
 TeamShortNameList = ['Josh','Zimean','Ian','Michael']
 TeamLongNameList = ['Joshua McDonald','Zimean Vickers','Ian Stewart','Michael Gallemore']
 
-ucdfa = dfgo    #[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
+ucdfa = dfgo[dfgo['Sprint']=='Sprint 00 (ends 12/30)']
 ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
 ucdfz = ucdfa[ucdfa['Analyst']=='Zimean Vickers']
 ucdfi = ucdfa[ucdfa['Analyst']=='Ian Stewart']
 ucdfm = ucdfa[ucdfa['Analyst']=='Michael Gallemore']
 
+ucdfah = ucdfa['Effort'].astype(int).sum()
+ucdfjh = ucdfj['Effort'].astype(int).sum()
+ucdfzh = ucdfz['Effort'].astype(int).sum()
+ucdfih = ucdfi['Effort'].astype(int).sum()
+ucdfmh = ucdfm['Effort'].astype(int).sum()
 
-# ucdfj = ucdfa[ucdfa['Analyst']=='Joshua McDonald']
-# ucdfz = ucdfa[ucdfa['Analyst']=='Zimean Vickers']
-# ucdfi = ucdfa[ucdfa['Analyst']=='Ian Stewart']
-# ucdfm = ucdfa[ucdfa['Analyst']=='Michael Gallemore']
-
-# ucdfah = ucdfa['Effort'].astype(int).sum()
-# ucdfjh = ucdfj['Effort'].astype(int).sum()
-# ucdfzh = ucdfz['Effort'].astype(int).sum()
-# ucdfih = ucdfi['Effort'].astype(int).sum()
-# ucdfmh = ucdfm['Effort'].astype(int).sum()
-
-# if ucdfjh < 8:      
-#     joshStatus = "Healthy Capacity" 
-#     joshSC = 'green'
-# elif ucdfjh == 8:   
-#     joshStatus = "At Capacity" 
-#     joshSC = 'yellow'
-# else:               
-#     joshStatus = "Over-Capacity"
-#     joshSC = 'red'
+if ucdfjh < 8:      
+    joshStatus = "Healthy Capacity" 
+    joshSC = 'green'
+elif ucdfjh == 8:   
+    joshStatus = "At Capacity" 
+    joshSC = 'yellow'
+else:               
+    joshStatus = "Over-Capacity"
+    joshSC = 'red'
     
-# if ucdfzh < 8:      
-#     zimeanStatus = "Healthy Capacity" 
-#     zimeanSC = 'green'
-# elif ucdfzh == 8:   
-#     zimeanStatus = "At Capacity" 
-#     zimeanSC = 'yellow'
-# else:               
-#     zimeanStatus = "Over-Capacity"
-#     zimeanSC = 'red'
+if ucdfzh < 8:      
+    zimeanStatus = "Healthy Capacity" 
+    zimeanSC = 'green'
+elif ucdfzh == 8:   
+    zimeanStatus = "At Capacity" 
+    zimeanSC = 'yellow'
+else:               
+    zimeanStatus = "Over-Capacity"
+    zimeanSC = 'red'
     
-# if ucdfih < 8:      
-#     ianStatus = "Healthy Capacity" 
-#     ianSC = 'green'
-# elif ucdfih == 8:   
-#     ianStatus = "At Capacity" 
-#     ianSC = 'yellow'
-# else:               
-#     ianStatus = "Over-Capacity"
-#     ianSC = 'red'
+if ucdfih < 8:      
+    ianStatus = "Healthy Capacity" 
+    ianSC = 'green'
+elif ucdfih == 8:   
+    ianStatus = "At Capacity" 
+    ianSC = 'yellow'
+else:               
+    ianStatus = "Over-Capacity"
+    ianSC = 'red'
     
-# if ucdfmh < 8:      
-#     michaelStatus = "Healthy Capacity" 
-#     michaelSC = 'green'
-# elif ucdfmh == 8:   
-#     michaelStatus = "At Capacity" 
-#     michaelSC = 'yellow'
-# else:               
-#     michaelStatus = "Over-Capacity"
-#     michaelSC = 'red'
+if ucdfmh < 8:      
+    michaelStatus = "Healthy Capacity" 
+    michaelSC = 'green'
+elif ucdfmh == 8:   
+    michaelStatus = "At Capacity" 
+    michaelSC = 'yellow'
+else:               
+    michaelStatus = "Over-Capacity"
+    michaelSC = 'red'
 
-# with st.sidebar:
-#     st.markdown(body='**Sprint 00**<br>',unsafe_allow_html=True)
-#     st.markdown(body='**Josh**<br><span style="color:'+joshSC+'">'+joshStatus+'</span><br><sup>('+str(ucdfjh)+')</sup>',unsafe_allow_html=True)
-#     st.markdown(body='**Zimean**<br><span style="color:'+zimeanSC+'">'+zimeanStatus+'</span><br><sup>('+str(ucdfzh)+')</sup>',unsafe_allow_html=True)
-#     st.markdown(body='**Ian**<br><span style="color:'+ianSC+'">'+ianStatus+'</span><br><sup>('+str(ucdfih)+')</sup>',unsafe_allow_html=True)
-#     st.markdown(body='**Michael**<br><span style="color:'+michaelSC+'">'+michaelStatus+'</span><br><sup>('+str(ucdfmh)+')</sup>',unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown(body='**Sprint 00**<br>',unsafe_allow_html=True)
+    st.markdown(body='**Josh**<br><span style="color:'+joshSC+'">'+joshStatus+'</span><br><sup>('+str(ucdfjh)+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Zimean**<br><span style="color:'+zimeanSC+'">'+zimeanStatus+'</span><br><sup>('+str(ucdfzh)+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Ian**<br><span style="color:'+ianSC+'">'+ianStatus+'</span><br><sup>('+str(ucdfih)+')</sup>',unsafe_allow_html=True)
+    st.markdown(body='**Michael**<br><span style="color:'+michaelSC+'">'+michaelStatus+'</span><br><sup>('+str(ucdfmh)+')</sup>',unsafe_allow_html=True)
     
     # st.metric('Josh ----------',value=ucdfjh,delta=8-int(ucdfjh),)
     # st.metric('Zimean --------',value=ucdfzh,delta=8-int(ucdfzh),)
@@ -237,28 +228,29 @@ ucdfm = ucdfa[ucdfa['Analyst']=='Michael Gallemore']
     # st.metric('Michael -------',value=ucdfmh,delta=8-int(ucdfmh),)
     # st.metric('TEAM TOTAL ----',value=ucdfah,delta=32-int(ucdfah),)
 
-
-joshcol, zimeancol, iancol, michaelcol = st.columns([1,1,1,1])
-with joshcol:  #dfall
-    st.markdown("Josh Outlook")
-    ucdfj['Effort'] = ucdfj['Effort'].apply(lambda x: float(x))
-    josheff = ucdfj.groupby('Sprint')['Effort'].sum()
-    st.dataframe(josheff)
-with zimeancol:  #dfall
-    st.markdown("Zimean Outlook")
-    ucdfz['Effort'] = ucdfz['Effort'].apply(lambda x: float(x))
-    zimeaneff = ucdfz.groupby('Sprint')['Effort'].sum()
-    st.dataframe(zimeaneff)
-with iancol:  #dfall
-    st.markdown("Ian Outlook")
-    ucdfi['Effort'] = ucdfi['Effort'].apply(lambda x: float(x))
-    ianeff = ucdfi.groupby('Sprint')['Effort'].sum()
-    st.dataframe(ianeff)
-with michaelcol:  #dfall
-    st.markdown("Michael Outlook")
-    ucdfm['Effort'] = ucdfm['Effort'].apply(lambda x: float(x))
-    michaeleff = ucdfm.groupby('Sprint')['Effort'].sum()
-    st.dataframe(michaeleff)
-
+bcol1, bcol2 = st.columns([1,1])
+with bcol1: 
+    with st.expander('Add New Project',expanded=False):    
+        with st.form("newtask"):
+           formName = st.text_input("Project")
+           formAnalyst = st.text_input("Analyst")
+           formNotes = st.text_input("Notes")
+        
+           # Every form must have a submit button.
+           submitted = st.form_submit_button("Submit")
+           definecols = ['Sprint','Project','Status','ReceivedDate','Analyst','Effort','Notes']
+           if submitted:
+               st.write("Thanks! Please refresh to see your item added at the bottom.")
+               formdf = pd.DataFrame(['not prioritized', formName, 'Open', todayfmt, formAnalyst, 0,formNotes]).T
+               formdf.columns = definecols
+               goog = formdf.values.tolist()
+               body = { 'values': goog }
+               service.spreadsheets().values().append(
+                                                       spreadsheetId=spreadsheetId, 
+                                                       range='PrimaryTable!A2:H',
+                                                       valueInputOption='USER_ENTERED', 
+                                                       body=body).execute() 
+               st.experimental_rerun()
+    
     
     
